@@ -10,15 +10,20 @@ namespace CaribbeanPokerMain
         public string state;
         public Gambler() => Money = 1000;
         public Gambler(Card[] cards): base(cards) => Money = 1000;
+        // FIXME: This method should close the program
         public void Quit(Game game)
         {
            state = "Quit"; 
         
         }
+        
+        // The aim of this function is to get a value of the ante from keyboard. Player can also write quit. In that case method quit is executed.    
+        //FIXME: You don't take any arguments. All needed fields are provided by object gambler.
         public Ante getAnte(Ante ante)
 
         {   //before starting the game we choose Ante
-            while( ante > 0)
+            //FIXME: loop condition
+            while( ante > 0) 
             {
             int myAnte; 
             Console.WriteLine("Bet obligatory Ante:");
@@ -27,7 +32,9 @@ namespace CaribbeanPokerMain
      
             switch (myAnte)
             {
+                // TODO: In order to handle casting error, please add try cath statements
                 case ((int)Ante.Ten):
+                    // FIXME: You don't need this message
                     Console.WriteLine("You bet 10");
                     break;
                 case ((int)Ante.Twenty):
@@ -48,8 +55,8 @@ namespace CaribbeanPokerMain
             return ante;
             
         }
-        
-           
+        //FIXME: The aim of this function is to get yes/no answer from player if he participates in jackpot
+        //FIXME: You don't take any arguments. All needed fields are provided by object gambler.
         public bool getJackpot(Gambler Jackpot)
         { 
             bool gameJ = true;
@@ -63,7 +70,8 @@ namespace CaribbeanPokerMain
             }
 
         
-        
+        //FIXME: The aim of this function is to get yes/no answer from player if he calls or folds
+        //FIXME: You don't take any arguments. All needed fields are provided by object gambler.
         public bool getCall(Ante JackpotAnte)
         {
             
@@ -85,9 +93,10 @@ namespace CaribbeanPokerMain
            
         }
           
-          
-        
-        public bool isBroken(Gambler Money)
+         
+        //FIXME: You don't take any arguments. All needed fields are provided by object gambler.
+        //FIXME: Check if money <= 0 and return bool value
+        public bool isBroke(Gambler Money)
         {
             bool broke = true;
             while(Money == null && broke)
