@@ -58,6 +58,7 @@ namespace battle_of_cards_grupauderzeniowa
                         {
                             Console.WriteLine("You won aggregate dealer bet plus get back Call/Ante");
                             Console.WriteLine("Press any key");
+                            Console.ReadKey();
                             int agregate = 1;
                             string generalhand = player.ToString().Substring(0,2);
                             if (generalhand == "PO") {agregate = 100;}
@@ -80,56 +81,55 @@ namespace battle_of_cards_grupauderzeniowa
                     }
                     else   //dealer: nothing
                     {
+                        bool qualify = false;
                         foreach (Card item in dealerHand)
                         {
                             if (item.Rank == Ranks.Ace || item.Rank==Ranks.King)  //reka kwalifikacyjna
                             {
-                                Hand handpower = new Hand(dealer);
-                                int outcome = handpower.CompareTo(player);
-                                if (outcome == 1)
-                                {
-                                    Console.WriteLine("Dealer won, you lost your Call/Ante");
-                                    Console.WriteLine("Press any key");
-                                    Console.ReadKey();
-                                    //gambler.SetMoney(gambler.GetMoney() - 3*ante);
-                                    break;
-                                } 
-                                if(outcome == -1) 
-                                {
-                                    Console.WriteLine ("You won aggregate dealer bet plus get back Call/Ante");
-                                    Console.WriteLine("Press any key");
-                                    Console.ReadKey();
-                                    int agregate = 1;
-                                    string generalhand = player.ToString().Substring(0,2);
-                                    if (generalhand == "PO") {agregate = 100;}
-                                    if (generalhand == "po") {agregate = 50;}
-                                    if (generalhand == "qu") {agregate = 20;}
-                                    if (generalhand == "fu") {agregate = 7;}
-                                    if (generalhand == "fl") {agregate = 5;}
-                                    if (generalhand == "st") {agregate = 4;}
-                                    if (generalhand == "tr") {agregate = 3;}
-                                    if (generalhand == "dp") {agregate = 2;}
-                                    gambler.SetMoney(gambler.GetMoney() + agregate*3*ante + 3*ante);
-                                    break;
-                                }
-                                if(outcome == 0) 
-                                {
-                                    Console.WriteLine("draw, get back Call/Ante");
-                                    Console.WriteLine("Press any key");
-                                    Console.ReadKey();
-                                    gambler.SetMoney(gambler.GetMoney()+3*ante);
-                                    break;
-                                }
-                                break;
+                                qualify = true;
                             }
-                            else
+                        }
+                        if (qualify)
+                        {
+                            Hand handpower = new Hand(dealer);
+                            int outcome = handpower.CompareTo(player);
+                            if (outcome == 1)
                             {
-                                Console.WriteLine("You get back Call/Ante plus extra Ante");
+                                Console.WriteLine("Dealer won, you lost your Call/Ante");
                                 Console.WriteLine("Press any key");
                                 Console.ReadKey();
-                                gambler.SetMoney(gambler.GetMoney() + 4 *ante);
-                                break;
                             }
+                            if(outcome == -1) 
+                            {
+                                Console.WriteLine ("You won aggregate dealer bet plus get back Call/Ante");
+                                Console.WriteLine("Press any key");
+                                Console.ReadKey();
+                                int agregate = 1;
+                                string generalhand = player.ToString().Substring(0,2);
+                                if (generalhand == "PO") {agregate = 100;}
+                                if (generalhand == "po") {agregate = 50;}
+                                if (generalhand == "qu") {agregate = 20;}
+                                if (generalhand == "fu") {agregate = 7;}
+                                if (generalhand == "fl") {agregate = 5;}
+                                if (generalhand == "st") {agregate = 4;}
+                                if (generalhand == "tr") {agregate = 3;}
+                                if (generalhand == "dp") {agregate = 2;}
+                                gambler.SetMoney(gambler.GetMoney() + agregate*3*ante + 3*ante);
+                            }
+                            if(outcome == 0) 
+                            {
+                                Console.WriteLine("draw, get back Call/Ante");
+                                Console.WriteLine("Press any key");
+                                Console.ReadKey();
+                                gambler.SetMoney(gambler.GetMoney()+3*ante);
+                            }
+                        }    
+                        else
+                        {
+                            Console.WriteLine("You get back Call/Ante plus extra Ante");
+                            Console.WriteLine("Press any key");
+                            Console.ReadKey();
+                            gambler.SetMoney(gambler.GetMoney() + 4 *ante);
                         }
                     }
                 }

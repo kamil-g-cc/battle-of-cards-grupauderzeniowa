@@ -20,14 +20,14 @@ namespace battle_of_cards_grupauderzeniowa
             
             var playercomb = Analisis.HandAnalizer(player);
             Console.Clear();
-            Console.WriteLine("           ===  CASINO ROYAL ===");
-            Console.WriteLine(".===========================================.");
+            Console.WriteLine("            ===  CASINO ROYAL ===");
+            Console.WriteLine(".=============================================.");
             for (int i = 0; i <10; i++)
             {
-                Console.WriteLine("|                                           |");
+                Console.WriteLine("|                                             |");
             }
-            Console.WriteLine("*===========================================*");
-            Console.SetCursorPosition(11,2);
+            Console.WriteLine("*=============================================*");
+            Console.SetCursorPosition(12,2);
             Console.Write("Caribbean Stud Poker");
             Console.SetCursorPosition(2,4);
             Console.Write("Dealer Hand: ");
@@ -37,7 +37,7 @@ namespace battle_of_cards_grupauderzeniowa
             }
             Console.Write(" -> " + dealercomb.ToString());
             Console.SetCursorPosition(2,5);
-            Console.Write("--------------------------------------");
+            Console.Write("------------------------------------------");
             Console.SetCursorPosition(2,6);
             Console.Write("Player Hand: ");
             for (int i = 0; i < 5; i++)
