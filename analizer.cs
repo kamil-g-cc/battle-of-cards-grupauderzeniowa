@@ -154,12 +154,15 @@ namespace battle_of_cards_grupauderzeniowa
                         lvalues.Reverse();
                         if (lvalues[0]== lvalues[1])  //pairs
                         {
-                            Ranks myBigger = mydict.Keys.ElementAt(0);
-                            for (int i = 1; i<3;i++)
+                            var myBigger = mydict.FirstOrDefault(x=>x.Value == 2).Key;
+                            for (int i = 0; i<3; i++)
                             {
-                                if (myBigger< mydict.Keys.ElementAt(i))
+                                if (mydict.Values.ElementAt(i)==2)
                                 {
-                                    myBigger = mydict.Keys.ElementAt(i);
+                                    if (mydict.Keys.ElementAt(i)> myBigger)
+                                    {
+                                        myBigger = mydict.Keys.ElementAt(i);
+                                    }
                                 }
                             }
                             if (myBigger == Ranks.Ace) return HandCombination.dpair_A;
