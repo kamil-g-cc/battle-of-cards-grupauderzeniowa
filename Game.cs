@@ -49,14 +49,14 @@ namespace battle_of_cards_grupauderzeniowa
                         int outcome = handpower.CompareTo(player);
                         if (outcome == 1)
                         {
-                            Console.WriteLine("You lost 60$");
+                            Console.WriteLine("You lost your Call/Ante");
                             Console.WriteLine("Press any key");
                             Console.ReadKey();
-                            gambler.SetMoney(gambler.GetMoney() - 3 * ante);
+                            //gambler.SetMoney(gambler.GetMoney() - 3 * ante);
                         } 
                         if(outcome == -1) 
                         {
-                            Console.WriteLine("You won aggregate money!!!");
+                            Console.WriteLine("You won aggregate dealer bet plus get back Call/Ante");
                             Console.WriteLine("Press any key");
                             int agregate = 1;
                             string generalhand = player.ToString().Substring(0,2);
@@ -68,14 +68,14 @@ namespace battle_of_cards_grupauderzeniowa
                             if (generalhand == "st") {agregate = 4;}
                             if (generalhand == "tr") {agregate = 3;}
                             if (generalhand == "dp") {agregate = 2;}
-                            gambler.SetMoney(gambler.GetMoney() + agregate*3*ante +2* ante);
+                            gambler.SetMoney(gambler.GetMoney() + agregate*3*ante + 3*ante);
                         }
                         if(outcome == 0) 
                         {
-                            Console.WriteLine("draw, get back Call");
+                            Console.WriteLine("draw, you get back Call/Ante");
                             Console.WriteLine("Press any key");
                             Console.ReadKey();
-                            gambler.SetMoney(gambler.GetMoney()+ 2*ante);
+                            gambler.SetMoney(gambler.GetMoney()+ 3*ante);
                         }
                     }
                     else   //dealer: nothing
@@ -88,15 +88,15 @@ namespace battle_of_cards_grupauderzeniowa
                                 int outcome = handpower.CompareTo(player);
                                 if (outcome == 1)
                                 {
-                                    Console.WriteLine("Dealer won, you lost 60$");
+                                    Console.WriteLine("Dealer won, you lost your Call/Ante");
                                     Console.WriteLine("Press any key");
                                     Console.ReadKey();
-                                    gambler.SetMoney(gambler.GetMoney() - 3*ante);
+                                    //gambler.SetMoney(gambler.GetMoney() - 3*ante);
                                     break;
                                 } 
                                 if(outcome == -1) 
                                 {
-                                    Console.WriteLine ("You won aggregate money!!!");
+                                    Console.WriteLine ("You won aggregate dealer bet plus get back Call/Ante");
                                     Console.WriteLine("Press any key");
                                     Console.ReadKey();
                                     int agregate = 1;
@@ -114,17 +114,17 @@ namespace battle_of_cards_grupauderzeniowa
                                 }
                                 if(outcome == 0) 
                                 {
-                                    Console.WriteLine("draw, get back Call");
+                                    Console.WriteLine("draw, get back Call/Ante");
                                     Console.WriteLine("Press any key");
                                     Console.ReadKey();
-                                    gambler.SetMoney(gambler.GetMoney()+2*ante);
+                                    gambler.SetMoney(gambler.GetMoney()+3*ante);
                                     break;
                                 }
                                 break;
                             }
                             else
                             {
-                                Console.WriteLine("You get back your Ante & Call plus extra Ante");
+                                Console.WriteLine("You get back Call/Ante plus extra Ante");
                                 Console.WriteLine("Press any key");
                                 Console.ReadKey();
                                 gambler.SetMoney(gambler.GetMoney() + 4 *ante);
@@ -148,7 +148,13 @@ namespace battle_of_cards_grupauderzeniowa
                     anothergame = false; 
                 } 
             } 
-            Console.WriteLine("End of the Game. You lost all your money");
+            int finalscore = gambler.GetMoney();
+            if (finalscore > 0)
+            {
+                if (finalscore>500) Console.WriteLine("You gain ${0}. See you next time",finalscore-500);
+                else Console.WriteLine("You lost ${0}. Next time will be better", 500 - finalscore);
+            }
+            else Console.WriteLine("End of the Game. You lost all your money");
         }
 
         public List<Card> Turn(List<Card> lc)
