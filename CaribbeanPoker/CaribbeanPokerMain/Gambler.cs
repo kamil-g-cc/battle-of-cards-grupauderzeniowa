@@ -10,10 +10,9 @@ namespace CaribbeanPokerMain
         public Gambler() => Money = 1000;
         public Gambler(Card[] cards): base(cards) => Money = 1000;
         // FIXME: This method should close the program
-        public void Quit(Game game)
+        public void Quit()
         {
-          Console.Write("Press <Enter> to exit... ");
-          while (Console.ReadKey().Key != ConsoleKey.Enter){}
+          System.Environment.Exit(0);
         } 
         
     
@@ -24,38 +23,49 @@ namespace CaribbeanPokerMain
 
         {   //before starting the game we choose Ante
             //FIXME: loop condition
-            int myAnte; 
-            Console.WriteLine("Bet obligatory Ante:");
-            myAnte = int.Parse(Console.ReadLine());
-            
-            // The player decides how much to play
-            while(myAnte != 0) 
-            {   
-                switch (myAnte)
-                {
-                    // TODO: In order to handle casting error, please add try cath statements
-                    case ((int)Ante.Ten):
-                        // FIXME: You don't need this message
+            int myAnte = 0;
+            while(myAnte == 0) 
+
+            {    
+                myAnte = 0;
+                Console.WriteLine("Bet obligatory Ante:");
+                myAnte = int.Parse(Console.ReadLine());
                 
-                        break;
-                    case ((int)Ante.Twenty):
+            // The player decides how much to play
+                try{
 
-                        
-                        break;
-                    case ((int)Ante.Fifty):
-                        
-                        break;
-                    case ((int)Ante.Hundred):
-                        
-                        break;
+                    switch (myAnte)
+                       {
+                           
+                        case ((int)Ante.Ten):
+                            
+                    
+                            break;
+                        case ((int)Ante.Twenty):
 
-                    default:
-                        Console.WriteLine("Sorry, you have entered an invalid value");
-                        break;
-                }
-                if(myAnte == int.Parse("Enter")){
-                   break;
-                }
+                            
+                            break;
+                        case ((int)Ante.Fifty):
+                            
+                            break;
+                        case ((int)Ante.Hundred):
+                            
+                            break;
+
+                        default:
+                            Console.WriteLine("Sorry, you have entered an invalid value");
+                            break;
+                       }
+                    }
+                    catch(Exception e){
+                         Console.WriteLine($"Sorry, you have entered an invalid value'{e}'");
+                         }
+                    if(myAnte == int.Parse("Enter"))
+                    {
+                        Console.Write("Press <Enter> to exit... ");
+                        while (Console.ReadKey().Key != ConsoleKey.Enter){}
+                        
+                    }       
                 
             } 
               return getAnte(); 
@@ -65,40 +75,57 @@ namespace CaribbeanPokerMain
         //FIXME: You don't take any arguments. All needed fields are provided by object gambler.
         public bool getJackpot()
         { 
-
+            bool jack = true;
+            while(jack){
             int folds;
             Console.WriteLine("Do  you participates in jackpot?Y/N");
             folds = int.Parse(Console.ReadLine());
-            if (folds==int.Parse("Y"))
-            {
-                return true;  
-            }
-            else
-            {
-                return false;
-            }
-           
-            }
+            try{
 
-        
+                if (folds==int.Parse("Y"))
+                {
+                    return true;  
+                }
+                else
+                {
+                    return false;
+                }
+               }
+               catch(Exception e)
+               {
+                   Console.WriteLine($"Sorry, you have entered an invalid value'{e}'");
+               }
+            }
+            return getJackpot();
+        }
         //FIXME: The aim of this function is to get yes/no answer from player if he calls or folds
         //FIXME: You don't take any arguments. All needed fields are provided by object gambler.
         public bool getCall()
         {
 
+            bool call = true;
+            while(call){
             int folds;
             Console.WriteLine("Do you fold?Y/N");
             folds = int.Parse(Console.ReadLine());
-            if (folds==int.Parse("Y"))
-            {
-                return true;  
+            try{
+                if (folds==int.Parse("Y"))
+                {
+                    return true;  
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch(Exception e)
             {
-                return false;
+               Console.WriteLine($"Sorry, you have entered an invalid value'{e}'"); 
             }
-
+             }
+             return getCall();
         }
+          
         //FIXME: You don't take any arguments. All needed fields are provided by object gambler.
         //FIXME: Check if money <= 0 and return bool value
         public bool isBroke()
@@ -107,7 +134,7 @@ namespace CaribbeanPokerMain
             if(Money <= 0)
             {
                 
-                Console.WriteLine("We're sorry you are broke");
+                
                 return true;
             }
             
