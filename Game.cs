@@ -7,7 +7,7 @@ namespace battle_of_cards_grupauderzeniowa
     class Game
     {
         private Deck deck = new Deck();
-        private Gambler gambler = new Gambler(250);
+        private Gambler gambler = new Gambler(500);
         public void Run()
         {
             int ante = 20;
@@ -120,7 +120,7 @@ namespace battle_of_cards_grupauderzeniowa
                                     gambler.SetMoney(gambler.GetMoney()+2*ante);
                                     break;
                                 }
-                                
+                                break;
                             }
                             else
                             {
